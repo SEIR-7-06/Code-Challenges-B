@@ -14,23 +14,56 @@ Note: The function accepts an integer and returns an integer
 <details>
 <summary>Click here to reveal a possible solution.</summary>
 <p>
-  
-  ```javascript  
-    // good solution
-    function squareDigits(num){
-        var string = num.toString();
-        var results = [];
-        for (var i = 0; i < string.length; i++){
-            results[i] = string[i] * string[i];
-        }
-        return Number(results.join(''));
-    };
 
-    // more concise solution
-    function squareDigits(num){
-      return +num.toString().split('').map(i => i*i).join('');
+```javascript
+// SOLUTION 1
+function squareEveryNumber(number) {
+  // Convert number into an array of digits
+  const digits = number.toString().split('');
+
+  let result = '';
+  // Loop through each digit
+  digits.forEach((digit) => {
+    // get the square of each digit
+    const square = parseInt(digit) ** 2;
+    // add square to end of string
+    result += square.toString();
+  });
+
+  return result;
+}
+
+// SOLUTION 2
+function squareEveryNumber(number) {
+  // Convert number into an array of digits
+  const digits = number.toString().split('');
+
+  // Get an array of squares as strings
+  const squares = digits.map((digit) => {
+    const square = parseInt(digit) ** 2;
+    return square.toString();
+  });
+
+  // Join all the square strings together
+  return squares.join('');
+}
+
+// SOLUTION 3
+function squareDigits(num){
+    var string = num.toString();
+    var results = [];
+    for (var i = 0; i < string.length; i++){
+        results[i] = string[i] * string[i];
     }
-  ```
+    return Number(results.join(''));
+};
+
+
+// SOLUTION 4
+function squareDigits(num){
+  return num.toString().split('').map(i => i * i).join('');
+}
+```
 </p>
 </details>
 
@@ -100,7 +133,7 @@ validatePIN("a234") === false
 
 [REPL](https://repl.it/@michaelpetty/GrowthSmallTown#index.js)
 
-In a small town the population is p0 = 1000 at the beginning of a year. The population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town. How many years does the town need to see its population greater or equal to p = 1200 inhabitants?
+In a small town the population is 1000 at the beginning of a year (p0). The population regularly increases by 2 percent per year and in addition to that, 50 new inhabitants per year come to live in the town. How many years will it take for the town to see its population greater or equal to 1200 inhabitants?
 
 ```
 At the end of the first year there will be: 
@@ -115,18 +148,24 @@ At the end of the 3rd year there will be:
 It will need 3 entire years.
 ```
 
-More generally given parameters:
+<!-- More generally given parameters: -->
 
-`p0`, `percent`, `aug` (inhabitants coming or leaving each year), `p` (population to surpass)
+<!-- `p0`, `percent`, `aug` (inhabitants coming or leaving each year), `p` (population to surpass)
 
 The function `nb_year` should return n number of entire years needed to get a population greater or equal to `p`.
 
-`aug` is an integer, `percent` a positive or null number, `p0` and `p` are positive integers (`> 0`)
+`aug` is an integer, `percent` a positive or null number, `p0` and `p` are positive integers (`> 0`) -->
+
+Write a function that takes in the starting population, the rate of population growth, the number of new inhabitants, and the population limit. The function should return the number of years it will take to reach or surpass the population limit.
 
 Examples:
 ```javascript
-nb_year(1500, 5, 100, 5000) -> 15
-nb_year(1500000, 2.5, 10000, 2000000) -> 10
+calcYears(startingPop, growthRate, newcomers, limit) {
+  // Calculate years here
+}
+
+calcYears(1500, 5, 100, 5000) -> 15
+calcYears(1500000, 2.5, 10000, 2000000) -> 10
 ```
 
 Note: Don't forget to convert the `percent` parameter as a percentage in the body of your function: if the parameter `percent` is `2` you have to convert it to `0.02`.
@@ -140,28 +179,33 @@ Note: Don't forget to convert the `percent` parameter as a percentage in the bod
   
   ```javascript
   // good and readable solution
-  function nbYear(p0, percent, aug, p) {
-      var count = 0;   
-      while(p0<p){
-          p0 += p0 * percent/100 + aug;
-          count++;
-      }
-      return count;
+  function calcYears(startingPop, growthRate, newComers, limit) {
+    let population = startingPop;
+    let year = 0;
+
+    // Increment the population and the year while the population is under
+    // the limit.
+    while (population <= limit) {
+      population = population + (population * growthRate / 100) + newComers;
+      year++;
+    }
+
+    return year;
   }
   
   // nice use of recursion
-  function nbYear(p0, percent, aug, p) {
+  function calcYears(p0, percent, aug, p) {
       // your code
       if (p0 >= p) {
         return 0;
       }
 
-      return 1 + nbYear(p0 + p0 * percent / 100 + aug, percent, aug, p);
+      return 1 + calcYears(p0 + p0 * percent / 100 + aug, percent, aug, p);
   }
   
   // clever, but not best practice
-  function nbYear(p0, percent, aug, p, years = 0) {
-    return p0 < p ? nbYear(p0 + p0 * percent / 100 + aug, percent, aug, p, years + 1) : years; 
+  function calcYears(p0, percent, aug, p, years = 0) {
+    return p0 < p ? calcYears(p0 + p0 * percent / 100 + aug, percent, aug, p, years + 1) : years; 
   }
   ```
 </p>
