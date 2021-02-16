@@ -148,14 +148,6 @@ At the end of the 3rd year there will be:
 It will need 3 entire years.
 ```
 
-<!-- More generally given parameters: -->
-
-<!-- `p0`, `percent`, `aug` (inhabitants coming or leaving each year), `p` (population to surpass)
-
-The function `nb_year` should return n number of entire years needed to get a population greater or equal to `p`.
-
-`aug` is an integer, `percent` a positive or null number, `p0` and `p` are positive integers (`> 0`) -->
-
 Write a function that takes in the starting population, the rate of population growth, the number of new inhabitants, and the population limit. The function should return the number of years it will take to reach or surpass the population limit.
 
 Examples:
