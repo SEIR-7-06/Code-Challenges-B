@@ -1,3 +1,89 @@
+# SmallestInt
+
+[REPL](https://repl.it/@michaelpetty/smallestInt)
+
+Given an array of integers your solution should find the smallest integer.
+
+For example:
+```
+Given [34, 15, 88, 2] your solution will return 2
+Given [34, -345, -1, 100] your solution will return -345
+```
+
+You can assume, for the purpose of this problem, that the supplied array will not be empty.
+
+```javascript
+function findSmallestInt(args) {
+  // Happy coding!  
+}
+```
+
+<hr>
+
+## Solution
+
+<details>
+  <summary>Click here to reveal a possible solution.</summary>
+  <p>
+
+```javascript
+// SOLUTION 1
+function findSmallestInt(arrayOfNums) {
+
+  // start with smallest being first number in array
+  let smallestInt = arrayOfNums[0];
+
+  // Loop through array of numbers
+  for (let i = 0; i < arrayOfNums.length; i++) {
+    if (arrayOfNums[i] < smallestInt) {
+      smallestInt = arrayOfNums[i];
+    }
+  }
+
+  return smallestInt;
+}
+
+
+///////////////////////////////////////////////////////
+// SOLUTION 2
+function findSmallestInt(array) {
+  let smallestInt = null;
+
+  // Loop through array
+  array.forEach((int) => {
+    if (smallestInt === null) {
+      smallestInt = int;
+    } else {
+      // if number is smallest so far make it new smallest number
+      if (int < smallestInt) {
+        smallestInt = int;
+      }
+    }
+  });
+  // return the smallest number
+  return smallestInt;
+}
+
+///////////////////////////////////////////////////////
+// SOLUTION 3
+function findSmallestInt(array) {
+  return array.reduce((smallest, int) => {
+    return int < smallest ? int : smallest;
+  }, Infinity);
+}
+
+///////////////////////////////////////////////////////
+// SOLUTION 4
+function findSmallestInt(array) {
+  return Math.min(...array);
+}
+```
+
+</p>
+</details>
+
+<hr>
+
 # Square Every Digit
 
 [REPL](https://repl.it/@michaelpetty/SquareEveryDigit)
@@ -16,7 +102,26 @@ Note: The function accepts an integer and returns an integer
 <p>
 
 ```javascript
-// SOLUTION 1
+// SOLUTION 1 - Using a for loop
+function squareEveryNumber(number) {
+  // Convert number into an array of digits
+  const digits = number.toString().split('');
+
+  let result = '';
+  // Loop through each digit
+  for (let i = 0; i < digits.length; i++) {
+    const square = parseInt(digits[i]) ** 2;
+
+    result += square.toString();
+  }
+
+  return result;
+}
+
+
+
+/////////////////////////////////////////////////////////
+// SOLUTION 2 - using forEach
 function squareEveryNumber(number) {
   // Convert number into an array of digits
   const digits = number.toString().split('');
@@ -33,7 +138,9 @@ function squareEveryNumber(number) {
   return result;
 }
 
-// SOLUTION 2
+
+/////////////////////////////////////////////////////////
+// SOLUTION 2 - Using map
 function squareEveryNumber(number) {
   // Convert number into an array of digits
   const digits = number.toString().split('');
@@ -48,6 +155,7 @@ function squareEveryNumber(number) {
   return squares.join('');
 }
 
+/////////////////////////////////////////////////////////
 // SOLUTION 3
 function squareDigits(num){
     var string = num.toString();
@@ -59,6 +167,7 @@ function squareDigits(num){
 };
 
 
+/////////////////////////////////////////////////////////
 // SOLUTION 4
 function squareDigits(num){
   return num.toString().split('').map(i => i * i).join('');
@@ -69,65 +178,6 @@ function squareDigits(num){
 
 <hr>
 
-# Regex PIN Validator
-
-[REPL](https://repl.it/@michaelpetty/RegexPINValidator#index.js)
-
-ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
-
-If the function is passed a valid PIN string, return true, else return false.
-
-eg:
-```javascript
-validatePIN("1234") === true
-validatePIN("12345") === false
-validatePIN("a234") === false
-```
-
-<hr>
-
-## Solution
-<details>
-<summary>Click here to reveal a possible solution.</summary>
-<p>
-  
-  ```javascript
-  // a solution, but nothing special 
-  function validatePIN(pin) {
-    //return true or false
-    var n = pin.length;
-    if( n != 4 && n != 6)
-        return false;
-    for (var i in pin)
-        if (pin[i] > '9' || pin[i] < '0')
-            return false;
-    return true;
-  }
-  
-  // good solution
-  function validatePIN(pin) {
-
-    var pinlen = pin.length;
-    var isCorrectLength = (pinlen == 4 || pinlen == 6);
-    var hasOnlyNumbers = pin.match(/^\d+$/);
-
-    if(isCorrectLength && hasOnlyNumbers){
-      return true;
-    }
-
-    return false;
-
-  }
-  
-  // cleanest solution
-  function validatePIN(pin) {
-    return /^(\d{4}|\d{6})$/.test(pin)
-  }
-  ```
-</p>
-</details>
-
-<hr>
 
 # Growth of a Small Town
 
