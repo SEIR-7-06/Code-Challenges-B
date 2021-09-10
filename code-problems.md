@@ -1,6 +1,114 @@
-# SmallestInt
+## shortLongShort
 
-[REPL](https://repl.it/@michaelpetty/smallestInt)
+Write a function that takes in 2 strings and returns a string of the form short+long+short. with the shorter string on the outside and the longer string on the inside. The strings will not be the same length, but they may be empty ( zero length ).
+
+For example
+```js
+function shortLongShort(string1, string2) {
+  // write code here
+}
+```
+
+```js
+shortLongShort('boom', 'chick');
+// => 'boomchickboom'
+
+shortLongShort('vis', 'a')
+// => 'avisa'
+```
+
+<details>
+  <summary>Solution</summary>
+
+  ```js
+  function solution(string1, string2) {
+    let longer = '';
+    let shorter = '';
+
+    if (string1.length > string2.length) {
+      longer = string1;
+      shorter = string2;
+    } else {
+      longer = string2;
+      shorter = string1;
+    }
+
+    return `${shorter}${longer}${shorter}`;
+  }
+  ```
+</details>
+
+### Hungry for More
+
+Have your function throw an error if the strings are the same length.
+
+<hr>
+
+## findIfInLove
+
+Timmy & Sarah think they are in love, but around where they live, they will only know once they pick a flower each. If one of the flowers has an even number of petals and the other has an odd number of petals it means they are in love.
+
+Write a function that will take the number of petals of each flower and return true if they are in love and false if they aren't.
+
+For Example
+```js
+function findIfInLove(flower1, flower2) {
+  // write code here
+}
+```
+
+```js
+findIfInLove(4, 5);
+// => true
+
+findIfInLove(8, 10);
+// => false
+```
+
+<details>
+  <summary>Solutions</summary>
+
+  ```js
+  function findIfInLove(flower1, flower2) {
+    const flowerOneIsEven = flower1 % 2 === 0;
+    const flowerTwoIsEven = flower2 % 2 === 0;
+
+    if (flowerOneIsEven && !flowerTwoIsEven) {
+      return true;
+    } else if (!flowerOneIsEven && flowerTwoIsEven) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  ```
+
+  ```js
+  function findIfInLove(flower1, flower2) {
+    const flowerOneIsEven = flower1 % 2 === 0;
+    const flowerTwoIsEven = flower2 % 2 === 0;
+
+    if (
+      (flowerOneIsEven && !flowerTwoIsEven)
+      || (!flowerOneIsEven && flowerTwoIsEven)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+  ```
+</details>
+
+### Hungry for More
+
+Have your function throw an error if either of the inputs is not an integer number.
+
+<hr>
+
+## SmallestInt
+
+<!-- [REPL](https://repl.it/@michaelpetty/smallestInt) -->
 
 Given an array of integers your solution should find the smallest integer.
 
@@ -84,15 +192,27 @@ function findSmallestInt(array) {
 
 <hr>
 
-# Square Every Digit
+## Square Every Digit
 
-[REPL](https://repl.it/@michaelpetty/SquareEveryDigit)
+<!-- [REPL](https://repl.it/@michaelpetty/SquareEveryDigit) -->
 
-Welcome. In this problem, you are asked to square every digit of a number.
+Write a function that takes in an integer number and squares every digit of integer. It should return a new integer of all the square numbers. Notice the function accepts an integer and returns an integer. You will have to think about how to get each digit individually.
 
-For example, if we run 9119 through the function, 811181 will come out, because 9^2 is 81 and 1^2 is 1.
+For example
+```js
+function squareEveryDigit(digits) {
+  // write code here
+}
+```
 
-Note: The function accepts an integer and returns an integer
+```js
+squareEveryDigit(323);
+// => 949
+
+squareEveryDigit(9229);
+// => 814481
+```
+
 
 <hr>
 
@@ -115,7 +235,7 @@ function squareEveryNumber(number) {
     result += square.toString();
   }
 
-  return result;
+  return Number(result);
 }
 
 
@@ -135,7 +255,7 @@ function squareEveryNumber(number) {
     result += square.toString();
   });
 
-  return result;
+  return Number(result);
 }
 
 
@@ -152,7 +272,9 @@ function squareEveryNumber(number) {
   });
 
   // Join all the square strings together
-  return squares.join('');
+  const resultString = squares.join('');
+
+  return Number(resultString);
 }
 
 /////////////////////////////////////////////////////////
@@ -170,7 +292,7 @@ function squareDigits(num){
 /////////////////////////////////////////////////////////
 // SOLUTION 4
 function squareDigits(num){
-  return num.toString().split('').map(i => i * i).join('');
+  return Number(num.toString().split('').map(i => i * i).join(''));
 }
 ```
 </p>
@@ -179,9 +301,9 @@ function squareDigits(num){
 <hr>
 
 
-# Growth of a Small Town
+## Growth of a Small Town
 
-[REPL](https://repl.it/@michaelpetty/GrowthSmallTown#index.js)
+<!-- [REPL](https://repl.it/@michaelpetty/GrowthSmallTown#index.js) -->
 
 In a small town the population is 1000 at the beginning of a year (p0). The population regularly increases by 2 percent per year and in addition to that, 50 new inhabitants per year come to live in the town. How many years will it take for the town to see its population greater or equal to 1200 inhabitants?
 
